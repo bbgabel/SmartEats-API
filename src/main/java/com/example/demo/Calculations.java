@@ -4,6 +4,7 @@ import java.lang.Character;
 
 public class Calculations {
 
+    public int userCals;
     public int maintanence;
     public int grow;
     public int deficit;
@@ -121,6 +122,15 @@ public class Calculations {
             }
 
         }
+
+        if (desiredWeight > weight) {
+            userCals = grow;
+        } else if (desiredWeight < weight) {
+            userCals = deficit;
+        } else {
+            userCals = maintanence;
+        }
+
 
     }
 

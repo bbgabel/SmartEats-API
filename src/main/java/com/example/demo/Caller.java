@@ -49,9 +49,9 @@ public class Caller {
         }
 
         GenerateMeals gen = new GenerateMeals();
-        List<String> bf = gen.allMeals("B");
-        List<String> l = gen.allMeals("L");
-        List<String> d = gen.allMeals("D");
+        List<String> bf = gen.allMeals("B", calculator);
+        List<String> l = gen.allMeals("L", calculator);
+        List<String> d = gen.allMeals("D", calculator);
         System.out.println(bf);
         System.out.println(l);
         System.out.println(d);
@@ -70,7 +70,7 @@ public class Caller {
             int index = names.indexOf(i);
             totalCal += calories.get(index);
         }
-        System.out.println("Goal: 3000, Achieved: " + totalCal);
+        System.out.println("Goal: " + calculator.userCals +  ", Achieved: " + totalCal);
 
     }
 

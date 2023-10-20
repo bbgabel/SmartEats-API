@@ -7,7 +7,7 @@ public class GenerateMeals {
     public static List<String> used = new ArrayList<>();
 
     
-    public List<String> allMeals(String meal) {
+    public List<String> allMeals(String meal, Calculations calculator) {
         List<String> bf = new ArrayList<>();
         List<Integer> elgible = new ArrayList<>();
 
@@ -17,10 +17,10 @@ public class GenerateMeals {
             }
         }
 
-        double allocatedCal = 1200;
-        double allocatedProtein = 50;
-        double allocatedCarbs = 66.6;
-        double allocatedFat = 26.6;
+        int allocatedCal = calculator.userCals;
+        int allocatedProtein = (int) calculator.protein;
+        int allocatedCarbs = (int) calculator.carbs;
+        int allocatedFat = (int) calculator.fat;
         
         double calPercent = 1.0;
         double proteinPercent = 1.0;
