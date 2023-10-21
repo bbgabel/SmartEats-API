@@ -17,10 +17,10 @@ public class GenerateMeals {
             }
         }
 
-        int allocatedCal = calculator.userCals;
-        int allocatedProtein = (int) calculator.protein;
-        int allocatedCarbs = (int) calculator.carbs;
-        int allocatedFat = (int) calculator.fat;
+        int allocatedCal = calculator.userCals / 3;
+        int allocatedProtein = (int) calculator.protein / 3;
+        int allocatedCarbs = (int) calculator.carbs / 3;
+        int allocatedFat = (int) calculator.fat / 3;
         
         double calPercent = 1.0;
         double proteinPercent = 1.0;
