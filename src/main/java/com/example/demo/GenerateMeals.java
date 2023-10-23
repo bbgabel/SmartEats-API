@@ -1,15 +1,18 @@
 package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GenerateMeals {
 
-    public static List<String> used = new ArrayList<>();
+    //public static List<String> used = new ArrayList<>();
 
     
     public List<String> allMeals(String meal, Calculations calculator) {
+
         List<String> bf = new ArrayList<>();
         List<Integer> elgible = new ArrayList<>();
+        Random rand = new Random();
 
         for (int i = 0; i < Caller.type.size(); i++) {
             if (Caller.type.get(i).contains(meal)) {
@@ -31,84 +34,89 @@ public class GenerateMeals {
 
         while (!done) {
 
-            int calMax = 0;
-            double otherMax = 0;
+            boolean macrosDone = false;
             int index = 0;
 
             if (target == 0) { //calories
 
-                calMax = 0;
-                index = -1;
-                for (int i : elgible) {
-                    if ((Caller.calories.get(i) > calMax) && (Caller.calories.get(i) < (allocatedCal * calPercent)) && (Caller.carbs.get(i) < (allocatedCarbs * carbPercent)) && (Caller.protein.get(i) < (allocatedProtein * proteinPercent)) && (Caller.fat.get(i) < (allocatedFat * fatPercent)) && !(used.contains(Caller.names.get(i)))) {
-                        calMax = Caller.calories.get(i);
-                        index = i;
-                    }
-                }
-                if (index == -1) {
-                    done = true;
-                    break;
-                } else {
+                index = rand.nextInt(elgible.size());
+                
                 bf.add(Caller.names.get(index));
-                used.add(Caller.names.get(index));
-                }
+                //used.add(Caller.names.get(index));
+                
                 //System.out.println("ADDED: " + Caller.names.get(index));
 
             } else if (target == 1) {  //protein
 
-                otherMax = 0;
-                index = -1;
-                for (int i : elgible) {
-                    if ((Caller.protein.get(i) > otherMax) && (Caller.protein.get(i) < (allocatedProtein * proteinPercent)) && (Caller.carbs.get(i) < (allocatedCarbs * carbPercent)) && (Caller.calories.get(i) < (allocatedCal * calPercent)) && (Caller.fat.get(i) < (allocatedFat * fatPercent))) {
-                        otherMax = Caller.protein.get(i);
-                        index = i;
+                int i = 0;
+
+                while (!macrosDone) {
+                    i++;
+                    index = rand.nextInt(elgible.size());
+
+                    double pCount = Caller.protein.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
+                    double cCount = Caller.carbs.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
+                    double fCount = Caller.fat.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
+
+                    if ((pCount > cCount) && (pCount > fCount)) {
+                        macrosDone = true;
+                    }
+                    if (i == elgible.size()) {
+                        macrosDone = true;
+                        break;
                     }
                 }
-                if (index == -1) {
-                    done = true;
-                    break;
-                } else {
-                bf.add(Caller.names.get(index));
-                used.add(Caller.names.get(index));
-                }
-                //System.out.println("ADDED: " + Caller.names.get(index));
+                bf.add(Caller.names.get(elgible.get(index)));
+                //used.add(Caller.names.get(elgible.get(index)));
+                
+                //System.out.println("ADDED PROTEIN: " + Caller.names.get(elgible.get(index)));
 
             } else if (target == 2) {  //carbs
 
-                otherMax = 0;
-                index = -1;
-                for (int i : elgible) {
-                    if ((Caller.carbs.get(i) > otherMax) && (Caller.carbs.get(i) < (allocatedCarbs * carbPercent)) && (Caller.protein.get(i) < (allocatedProtein * proteinPercent)) && (Caller.calories.get(i) < (allocatedCal * calPercent)) && (Caller.fat.get(i) < (allocatedFat * fatPercent))) {
-                        otherMax = Caller.carbs.get(i);
-                        index = i;
+                int i = 0;
+
+                while (!macrosDone) {
+                    i++;
+                    index = rand.nextInt(elgible.size());
+
+                    double pCount = Caller.protein.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
+                    double cCount = Caller.carbs.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
+                    double fCount = Caller.fat.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
+
+                    if ((cCount > pCount) && (cCount > fCount)) {
+                        macrosDone = true;
+                    }
+                    if (i == elgible.size()) {
+                        macrosDone = true;
+                        break;
                     }
                 }
-                if (index == -1) {
-                    done = true;
-                    break;
-                } else {
-                bf.add(Caller.names.get(index));
-                used.add(Caller.names.get(index));
-                }
+                bf.add(Caller.names.get(elgible.get(index)));
+                //used.add(Caller.names.get(elgible.get(index)));
                 //System.out.println("ADDED: " + Caller.names.get(index));
 
               } else if (target == 3) {  //fat
 
-                otherMax = 0;
-                index = -1;
-                for (int i : elgible) {
-                    if ((Caller.fat.get(i) > otherMax) && (Caller.fat.get(i) < (allocatedFat * fatPercent)) && (Caller.protein.get(i) < (allocatedProtein * proteinPercent)) && (Caller.calories.get(i) < (allocatedCal * calPercent)) && (Caller.carbs.get(i) < (allocatedCarbs * carbPercent))) {
-                        otherMax = Caller.fat.get(i);
-                        index = i;
+                int i = 0;
+
+                while (!macrosDone) {
+                    i++;
+                    index = rand.nextInt(elgible.size());
+
+                    double pCount = Caller.protein.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
+                    double cCount = Caller.carbs.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
+                    double fCount = Caller.fat.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
+
+                    if ((fCount > pCount) && (fCount > cCount)) {
+                        macrosDone = true;
+                    }
+                    if (i == elgible.size()) {
+                        macrosDone = true;
+                        break;
                     }
                 }
-                if (index == -1) {
-                    done = true;
-                    break;
-                } else {
-                bf.add(Caller.names.get(index));
-                used.add(Caller.names.get(index));
-                }
+                bf.add(Caller.names.get(elgible.get(index)));
+                //used.add(Caller.names.get(elgible.get(index)));
                 //System.out.println("ADDED: " + Caller.names.get(index));
 
             } else {
@@ -134,8 +142,7 @@ public class GenerateMeals {
     public int getTarget(double cal, double protein, double carb, double fat) {
 
             double max = Math.max(Math.max(Math.max(cal, protein), carb), fat);
-            if (max < .10) {
-                System.out.println("Exiting (max = " + max + ")");
+            if (max < .05) {
                 return -1;
             }
 
