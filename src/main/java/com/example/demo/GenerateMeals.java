@@ -20,10 +20,10 @@ public class GenerateMeals {
             }
         }
 
-        int allocatedCal = calculator.userCals / 3;
-        int allocatedProtein = (int) calculator.protein / 3;
-        int allocatedCarbs = (int) calculator.carbs / 3;
-        int allocatedFat = (int) calculator.fat / 3;
+        int allocatedCal = (int) Math.round(calculator.userCals * .2);
+        int allocatedProtein = (int) Math.round(calculator.protein * .2);
+        int allocatedCarbs = (int) Math.round(calculator.carbs * .2);
+        int allocatedFat = (int) Math.round(calculator.fat * .2);
         
         double calPercent = 1.0;
         double proteinPercent = 1.0;
@@ -41,7 +41,7 @@ public class GenerateMeals {
 
                 index = rand.nextInt(elgible.size());
                 
-                bf.add(Caller.names.get(index));
+                bf.add(Caller.names.get(elgible.get(index)));
                 //used.add(Caller.names.get(index));
                 
                 //System.out.println("ADDED: " + Caller.names.get(index));
