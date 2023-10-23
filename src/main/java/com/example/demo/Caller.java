@@ -52,11 +52,11 @@ public class Caller {
 
         GenerateMeals gen = new GenerateMeals();
         List<String> bf;
-        //List<String> l;
+        List<String> l;
         //List<String> d;
 
             bf = gen.allMeals("B", calculator);
-            //l = gen.allMeals("L", calculator);
+            l = gen.allMeals("L", calculator);
             //d = gen.allMeals("D", calculator);
 
             System.out.println("Attempting: " + calculator.userCals + " Calories, " + Math.round(calculator.protein) + "g Protein, " + Math.round(calculator.carbs) + "g Carbs, and " + Math.round(calculator.fat) + "g Fat.");
@@ -69,20 +69,17 @@ public class Caller {
             System.out.println("(breakfast) Algorithm completed with [" + test + "] attemps!");
             System.out.println(bf);
 
-            /*
+            
             test = 0;
             
             while (!checkMargin(l)) {
-                bf = gen.allMeals("L", calculator);
+                l = gen.allMeals("L", calculator);
                 test++;
             }
             System.out.println("(lunch) Algorithm completed with [" + test + "] attemps!");
-            
-
-
-            System.out.println(bf);
             System.out.println(l);
-            */
+            
+            
 
 
     }
@@ -105,29 +102,29 @@ public class Caller {
             totalC += carbs.get(index);
             totalF += fat.get(index);
         }
-        System.out.println("Goal: " + calc.userCals * .2 + " | " + calc.protein * .2 + " | " + calc.carbs * .2 + " | " + calc.fat * .2);
-        System.out.println("Got: " + totalCal + " | " + totalP + " | " + totalC + " | " + totalF);
-        System.out.println(meal);
-        System.out.println("________________________________________________________");
+        //System.out.println("Goal: " + calc.userCals * .2 + " | " + calc.protein * .2 + " | " + calc.carbs * .2 + " | " + calc.fat * .2);
+        //System.out.println("Got: " + totalCal + " | " + totalP + " | " + totalC + " | " + totalF);
+        //System.out.println(meal);
+        //System.out.println("________________________________________________________");
 
         if ((totalCal / (calc.userCals / 3)) < 1.3 && (totalCal / (calc.userCals / 3)) > .7) {
             validCal = true;
         }
-        if ((totalP / (calc.protein / 3)) < 1.3 && (totalP / (calc.protein / 3)) > .7) {
+        if ((totalP / (calc.protein / 3)) < 1.5 && (totalP / (calc.protein / 3)) > .5) {
             validP = true;
         }
-        if ((totalC / (calc.carbs / 3)) < 1.3 && (totalC / (calc.carbs / 3)) > .7) {
+        if ((totalC / (calc.carbs / 3)) < 1.5 && (totalC / (calc.carbs / 3)) > .5) {
             validC = true;
         }
-        if ((totalF / (calc.fat / 3)) < 1.3 && (totalF / (calc.fat / 3)) > .7) {
+        if ((totalF / (calc.fat / 3)) < 1.5 && (totalF / (calc.fat / 3)) > .5) {
             validF = true;
         }
 
         if (validCal && validP && validC && validF) {
-            System.out.println("Calories acheived: " + totalCal + " | desired: " + calc.userCals / 3);
-            System.out.println("Protein acheived: " + totalP + " | desired: " + calc.protein / 3);
-            System.out.println("Carbs acheived: " + totalC + " | desired: " + calc.carbs / 3);
-            System.out.println("Fat acheived: " + totalF + " | desired: " + calc.fat / 3);
+            System.out.println("Calories acheived: " + totalCal + " | desired: " + Math.round(calc.userCals / 3));
+            System.out.println("Protein acheived: " + totalP + " | desired: " + Math.round(calc.protein / 3));
+            System.out.println("Carbs acheived: " + totalC + " | desired: " + Math.round(calc.carbs / 3));
+            System.out.println("Fat acheived: " + totalF + " | desired: " + Math.round(calc.fat / 3));
             return true;
         } else {
             return false;
