@@ -3,7 +3,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -28,7 +34,7 @@ public class Caller {
         }
     }
 
-    public void useData(Calculations calculator) {
+    public String useData(Calculations calculator) {
         calc = calculator;
         try {
             Statement statement = connection.createStatement();
@@ -78,10 +84,27 @@ public class Caller {
             }
             System.out.println("(lunch) Algorithm completed with [" + test + "] attemps!");
             System.out.println(l);
+
+            Map<String, List<?>> results = generateResults(bf);
+
+            System.out.println("\nSuccess!");
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = "";
+
+            try {
+                // Serialize the map to a JSON string
+                json = objectMapper.writeValueAsString(results);
+    
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+            }
+
+            return json;
             
             
 
-
+            
     }
 
     public boolean checkMargin(List<String> meal) {
@@ -130,6 +153,36 @@ public class Caller {
             return false;
         }
 
+    }
+
+    public Map<String, List<?>> generateResults(List<String> meal) {
+
+        Map<String, List<?>> result = new HashMap<>();
+        List<String> names = new ArrayList<>();
+        List<Integer> totalCal = new ArrayList<>();
+        List<Double> totalP = new ArrayList<>();
+        List<Double> totalC = new ArrayList<>();
+        List<Double> totalF = new ArrayList<>();
+        List<String> serving = new ArrayList<>();
+        
+        for (String i : meal) {
+            int index = Caller.names.indexOf(i);
+            names.add(i);
+            totalCal.add(Caller.calories.get(index));
+            totalP.add(protein.get(index));
+            totalC.add(carbs.get(index));
+            totalF.add(fat.get(index));
+            serving.add(servingSize.get(index));
+        }
+
+        result.put("Names", names);
+        result.put("Calories", totalCal);
+        result.put("Protein", totalP);
+        result.put("Carbs", totalC);
+        result.put("Fat", totalF);
+        result.put("Serving", serving);
+
+        return result;
     }
 
     

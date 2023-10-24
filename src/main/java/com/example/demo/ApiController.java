@@ -15,9 +15,9 @@ public class ApiController {
 
         Caller caller = new Caller();
         Calculations calculation = new Calculations(requestData.age, requestData.height, requestData.weight, requestData.desiredWeight, requestData.sex, requestData.activity, requestData.body);
-        caller.useData(calculation);
+        String data = caller.useData(calculation);
 
-        return ResponseEntity.ok("API Call successful");
+        return ResponseEntity.ok(data);
     }
     
 }
