@@ -58,7 +58,7 @@ public class GenerateMeals {
                     double cCount = Caller.carbs.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
                     double fCount = Caller.fat.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
 
-                    if ((pCount > cCount) && (pCount > fCount)) {
+                    if ((pCount > cCount) && (pCount > fCount) && (Caller.calories.get(elgible.get(index)) < (calPercent * allocatedCal))) {
                         macrosDone = true;
                     }
                     if (i == elgible.size()) {
@@ -69,7 +69,8 @@ public class GenerateMeals {
                 bf.add(Caller.names.get(elgible.get(index)));
                 //used.add(Caller.names.get(elgible.get(index)));
                 
-                //System.out.println("ADDED PROTEIN: " + Caller.names.get(elgible.get(index)));
+                //System.out.println("ADDED PROTEIN: " + Caller.names.get(elgible.get(index)) + " with " + (calPercent * allocatedCal) + " remining");
+                //System.out.println("Food calories: " + Caller.protein.get(elgible.get(index)));
 
             } else if (target == 2) {  //carbs
 
@@ -83,7 +84,7 @@ public class GenerateMeals {
                     double cCount = Caller.carbs.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
                     double fCount = Caller.fat.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
 
-                    if ((cCount > pCount) && (cCount > fCount)) {
+                    if ((cCount > pCount) && (cCount > fCount) && (Caller.calories.get(elgible.get(index)) < (calPercent * allocatedCal))) {
                         macrosDone = true;
                     }
                     if (i == elgible.size()) {
@@ -93,7 +94,7 @@ public class GenerateMeals {
                 }
                 bf.add(Caller.names.get(elgible.get(index)));
                 //used.add(Caller.names.get(elgible.get(index)));
-                //System.out.println("ADDED: " + Caller.names.get(index));
+                //System.out.println("ADDED CARB: " + Caller.names.get(index) + " with " + (calPercent * allocatedCal) + " remining");
 
               } else if (target == 3) {  //fat
 
@@ -107,7 +108,7 @@ public class GenerateMeals {
                     double cCount = Caller.carbs.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
                     double fCount = Caller.fat.get(elgible.get(index)) / Caller.calories.get(elgible.get(index));
 
-                    if ((fCount > pCount) && (fCount > cCount)) {
+                    if ((fCount > pCount) && (fCount > cCount) && (Caller.calories.get(elgible.get(index)) < (calPercent * allocatedCal))) {
                         macrosDone = true;
                     }
                     if (i == elgible.size()) {
@@ -117,16 +118,16 @@ public class GenerateMeals {
                 }
                 bf.add(Caller.names.get(elgible.get(index)));
                 //used.add(Caller.names.get(elgible.get(index)));
-                //System.out.println("ADDED: " + Caller.names.get(index));
+                //System.out.println("ADDED FAT: " + Caller.names.get(index) + " with " + (calPercent * allocatedCal) + " remining");
 
             } else {
                 done = true;
             }
             
-            calPercent = (((calPercent * allocatedCal) - Caller.calories.get(index)) / allocatedCal);
-            proteinPercent = (((proteinPercent * allocatedProtein) - Caller.protein.get(index)) / allocatedProtein);
-            carbPercent = (((carbPercent * allocatedCarbs) - Caller.carbs.get(index)) / allocatedCarbs);
-            fatPercent = (((fatPercent * allocatedFat) - Caller.fat.get(index)) / allocatedFat);
+            calPercent = (((calPercent * allocatedCal) - Caller.calories.get(elgible.get(index))) / allocatedCal);
+            proteinPercent = (((proteinPercent * allocatedProtein) - Caller.protein.get(elgible.get(index))) / allocatedProtein);
+            carbPercent = (((carbPercent * allocatedCarbs) - Caller.carbs.get(elgible.get(index))) / allocatedCarbs);
+            fatPercent = (((fatPercent * allocatedFat) - Caller.fat.get(elgible.get(index))) / allocatedFat);
 
             //System.out.println("cal:" + calPercent + " protein:" + proteinPercent + " carb:" + carbPercent + " fat:" + fatPercent);
             target = getTarget(calPercent, proteinPercent, carbPercent, fatPercent);

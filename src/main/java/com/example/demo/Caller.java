@@ -58,14 +58,13 @@ public class Caller {
 
         GenerateMeals gen = new GenerateMeals();
         List<String> bf;
-        List<String> l;
-        //List<String> d;
+        List<String> d;
 
             bf = gen.allMeals("B", calculator);
-            l = gen.allMeals("D", calculator);
-            //d = gen.allMeals("D", calculator);
+            d = gen.allMeals("D", calculator);
 
             System.out.println("Attempting: " + calculator.userCals + " Calories, " + Math.round(calculator.protein) + "g Protein, " + Math.round(calculator.carbs) + "g Carbs, and " + Math.round(calculator.fat) + "g Fat.");
+            System.out.println("________________________________________________________\n");
 
             int test = 0;
             while (!checkMargin(bf)) {
@@ -74,21 +73,23 @@ public class Caller {
             }
             System.out.println("(breakfast) Algorithm completed with [" + test + "] attemps!");
             System.out.println(bf);
+            System.out.println("________________________________________________________\n");
 
             
             test = 0;
             
-            while (!checkMargin(l)) {
-                l = gen.allMeals("D", calculator);
+            while (!checkMargin(d)) {
+                d = gen.allMeals("D", calculator);
                 test++;      
             }
             System.out.println("(lunch) Algorithm completed with [" + test + "] attemps!");
-            System.out.println(l);
+            System.out.println(d);
+            System.out.println("________________________________________________________\n");
 
 
 
             Map<String, List<?>> breakfast = generateResults(bf);
-            Map<String, List<?>> lunch = generateResults(l);
+            Map<String, List<?>> lunch = generateResults(d);
             Map<String, Map<String, List<?>>> Meals = new HashMap<>();
             Meals.put("breakfast", breakfast);
             Meals.put("lunch", lunch);
@@ -123,6 +124,7 @@ public class Caller {
         boolean validP = false;
         boolean validC = false;
         boolean validF = false;
+        double allocatedCal = calc.userCals / 3;
 
         for (String i : meal) {
             int index = names.indexOf(i);
@@ -136,7 +138,7 @@ public class Caller {
         //System.out.println(meal + "\n");
         //System.out.println("________________________________________________________");
 
-        if ((totalCal / (calc.userCals / 3)) < 1.3 && (totalCal / (calc.userCals / 3)) > .7) {
+        if (((totalCal / allocatedCal) < 1.2) && ((totalCal / allocatedCal) > .8)) {
             validCal = true;
         }
         if ((totalP / (calc.protein / 3)) < 1.5 && (totalP / (calc.protein / 3)) > .5) {
@@ -150,10 +152,10 @@ public class Caller {
         }
 
         if (validCal && validP && validC && validF) {
-            //System.out.println("Calories acheived: " + totalCal + " | desired: " + Math.round(calc.userCals / 3));
-            //System.out.println("Protein acheived: " + totalP + " | desired: " + Math.round(calc.protein / 3));
-            //System.out.println("Carbs acheived: " + totalC + " | desired: " + Math.round(calc.carbs / 3));
-            //System.out.println("Fat acheived: " + totalF + " | desired: " + Math.round(calc.fat / 3));
+            System.out.println("Calories acheived: " + totalCal + " | desired: " + Math.round(calc.userCals / 3));
+            System.out.println("Protein acheived: " + totalP + " | desired: " + Math.round(calc.protein / 3));
+            System.out.println("Carbs acheived: " + totalC + " | desired: " + Math.round(calc.carbs / 3));
+            System.out.println("Fat acheived: " + totalF + " | desired: " + Math.round(calc.fat / 3));
             return true;
         } else {
             return false;
