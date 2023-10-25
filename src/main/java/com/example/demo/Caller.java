@@ -62,7 +62,7 @@ public class Caller {
         //List<String> d;
 
             bf = gen.allMeals("B", calculator);
-            l = gen.allMeals("L", calculator);
+            l = gen.allMeals("D", calculator);
             //d = gen.allMeals("D", calculator);
 
             System.out.println("Attempting: " + calculator.userCals + " Calories, " + Math.round(calculator.protein) + "g Protein, " + Math.round(calculator.carbs) + "g Carbs, and " + Math.round(calculator.fat) + "g Fat.");
@@ -79,13 +79,22 @@ public class Caller {
             test = 0;
             
             while (!checkMargin(l)) {
-                l = gen.allMeals("L", calculator);
+                l = gen.allMeals("D", calculator);
                 test++;
+                //System.out.println(l+"\n");
             }
             System.out.println("(lunch) Algorithm completed with [" + test + "] attemps!");
             System.out.println(l);
 
-            Map<String, List<?>> results = generateResults(bf);
+
+
+            Map<String, List<?>> breakfast = generateResults(bf);
+            Map<String, Map<String, List<?>>> breakfastMeal = new HashMap<>();
+            breakfastMeal.put("breakfast", breakfast);
+
+            Map<String, List<?>> lunch = generateResults(l);
+            Map<String, Map<String, List<?>>> lunchMeal = new HashMap<>();
+            lunchMeal.put("lunch", lunch);
 
             System.out.println("\nSuccess!");
 
@@ -94,7 +103,8 @@ public class Caller {
 
             try {
                 // Serialize the map to a JSON string
-                json = objectMapper.writeValueAsString(results);
+                json = objectMapper.writeValueAsString(breakfastMeal);
+                json += objectMapper.writeValueAsString(lunchMeal);
     
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
@@ -125,7 +135,7 @@ public class Caller {
             totalC += carbs.get(index);
             totalF += fat.get(index);
         }
-        //System.out.println("Goal: " + calc.userCals * .2 + " | " + calc.protein * .2 + " | " + calc.carbs * .2 + " | " + calc.fat * .2);
+        //System.out.println("Goal: " + calc.userCals / 3 + " | " + calc.protein / 3  + " | " + calc.carbs / 3 + " | " + calc.fat / 3);
         //System.out.println("Got: " + totalCal + " | " + totalP + " | " + totalC + " | " + totalF);
         //System.out.println(meal);
         //System.out.println("________________________________________________________");
@@ -144,10 +154,10 @@ public class Caller {
         }
 
         if (validCal && validP && validC && validF) {
-            System.out.println("Calories acheived: " + totalCal + " | desired: " + Math.round(calc.userCals / 3));
-            System.out.println("Protein acheived: " + totalP + " | desired: " + Math.round(calc.protein / 3));
-            System.out.println("Carbs acheived: " + totalC + " | desired: " + Math.round(calc.carbs / 3));
-            System.out.println("Fat acheived: " + totalF + " | desired: " + Math.round(calc.fat / 3));
+            //System.out.println("Calories acheived: " + totalCal + " | desired: " + Math.round(calc.userCals / 3));
+            //System.out.println("Protein acheived: " + totalP + " | desired: " + Math.round(calc.protein / 3));
+            //System.out.println("Carbs acheived: " + totalC + " | desired: " + Math.round(calc.carbs / 3));
+            //System.out.println("Fat acheived: " + totalF + " | desired: " + Math.round(calc.fat / 3));
             return true;
         } else {
             return false;
