@@ -80,8 +80,7 @@ public class Caller {
             
             while (!checkMargin(l)) {
                 l = gen.allMeals("D", calculator);
-                test++;
-                //System.out.println(l+"\n");
+                test++;      
             }
             System.out.println("(lunch) Algorithm completed with [" + test + "] attemps!");
             System.out.println(l);
@@ -134,7 +133,7 @@ public class Caller {
         }
         //System.out.println("Goal: " + calc.userCals / 3 + " | " + calc.protein / 3  + " | " + calc.carbs / 3 + " | " + calc.fat / 3);
         //System.out.println("Got: " + totalCal + " | " + totalP + " | " + totalC + " | " + totalF);
-        //System.out.println(meal);
+        //System.out.println(meal + "\n");
         //System.out.println("________________________________________________________");
 
         if ((totalCal / (calc.userCals / 3)) < 1.3 && (totalCal / (calc.userCals / 3)) > .7) {
