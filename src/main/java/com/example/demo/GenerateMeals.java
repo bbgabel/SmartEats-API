@@ -30,7 +30,7 @@ public class GenerateMeals {
         double carbPercent = 1.0;
         double fatPercent = 1.0;
         boolean done = false;
-        int target = 0;
+        int target = 1;
 
         while (!done) {
 
@@ -141,14 +141,12 @@ public class GenerateMeals {
 
     public int getTarget(double cal, double protein, double carb, double fat) {
 
-            double max = Math.max(Math.max(Math.max(cal, protein), carb), fat);
+            double max = Math.max(Math.max(protein, carb), fat);
             if (max < .05) {
                 return -1;
             }
 
-            if (max == cal) {
-                return 0;
-            } else if (max == protein) {
+            if (max == protein) {
                 return 1;
             } else if (max == carb) {
                 return 2;
