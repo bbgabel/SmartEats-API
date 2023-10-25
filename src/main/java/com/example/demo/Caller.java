@@ -89,12 +89,10 @@ public class Caller {
 
 
             Map<String, List<?>> breakfast = generateResults(bf);
-            Map<String, Map<String, List<?>>> breakfastMeal = new HashMap<>();
-            breakfastMeal.put("breakfast", breakfast);
-
             Map<String, List<?>> lunch = generateResults(l);
-            Map<String, Map<String, List<?>>> lunchMeal = new HashMap<>();
-            lunchMeal.put("lunch", lunch);
+            Map<String, Map<String, List<?>>> Meals = new HashMap<>();
+            Meals.put("breakfast", breakfast);
+            Meals.put("lunch", lunch);
 
             System.out.println("\nSuccess!");
 
@@ -103,8 +101,7 @@ public class Caller {
 
             try {
                 // Serialize the map to a JSON string
-                json = objectMapper.writeValueAsString(breakfastMeal);
-                json += objectMapper.writeValueAsString(lunchMeal);
+                json = objectMapper.writeValueAsString(Meals);
     
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
