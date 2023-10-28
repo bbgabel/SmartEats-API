@@ -62,8 +62,7 @@ public class GenerateMeals {
                         macrosDone = true;
                     }
                     if (i == elgible.size()) {
-                        macrosDone = true;
-                        break;
+                        return bf;
                     }
                 }
                 bf.add(Caller.names.get(elgible.get(index)));
@@ -88,8 +87,7 @@ public class GenerateMeals {
                         macrosDone = true;
                     }
                     if (i == elgible.size()) {
-                        macrosDone = true;
-                        break;
+                        return bf;
                     }
                 }
                 bf.add(Caller.names.get(elgible.get(index)));
@@ -112,8 +110,7 @@ public class GenerateMeals {
                         macrosDone = true;
                     }
                     if (i == elgible.size()) {
-                        macrosDone = true;
-                        break;
+                        return bf;
                     }
                 }
                 bf.add(Caller.names.get(elgible.get(index)));
