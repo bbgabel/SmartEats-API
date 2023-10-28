@@ -30,7 +30,7 @@ public class GenerateMeals {
         double carbPercent = 1.0;
         double fatPercent = 1.0;
         boolean done = false;
-        int target = 1;
+        int target = 0;
 
         while (!done) {
 
