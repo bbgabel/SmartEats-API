@@ -58,9 +58,11 @@ public class Caller {
 
         GenerateMeals gen = new GenerateMeals();
         List<String> bf;
+        List<String> l;
         List<String> d;
 
             bf = gen.allMeals("B", calculator);
+            l = gen.allMeals("L", calculator);
             d = gen.allMeals("D", calculator);
 
             System.out.println("Attempting: " + calculator.userCals + " Calories, " + Math.round(calculator.protein) + "g Protein, " + Math.round(calculator.carbs) + "g Carbs, and " + Math.round(calculator.fat) + "g Fat.");
@@ -77,22 +79,34 @@ public class Caller {
 
             
             test = 0;
+
+            while (!checkMargin(l)) {
+                l = gen.allMeals("L", calculator);
+                test++;
+            }
+            System.out.println("(lunch) Algorithm completed with [" + test + "] attemps!");
+            System.out.println(l);
+            System.out.println("________________________________________________________\n");
+
+            test = 0;
             
             while (!checkMargin(d)) {
                 d = gen.allMeals("D", calculator);
                 test++;      
             }
-            System.out.println("(lunch) Algorithm completed with [" + test + "] attemps!");
+            System.out.println("(dinner) Algorithm completed with [" + test + "] attemps!");
             System.out.println(d);
             System.out.println("________________________________________________________\n");
 
 
 
             Map<String, List<?>> breakfast = generateResults(bf);
-            Map<String, List<?>> lunch = generateResults(d);
+            Map<String, List<?>> lunch = generateResults(l);
+            Map<String, List<?>> dinner = generateResults(d);
             Map<String, Map<String, List<?>>> Meals = new HashMap<>();
             Meals.put("breakfast", breakfast);
             Meals.put("lunch", lunch);
+            Meals.put("dinner", dinner);
 
             System.out.println("\nSuccess!");
 
