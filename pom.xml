@@ -23,6 +23,28 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-dialogflow</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>1.35.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.auth</groupId>
+			<artifactId>google-auth-library-oauth2-http</artifactId>
+			<version>0.25.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.api</groupId>
+			<artifactId>gax</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+
+
+		<dependency>
 			<groupId>org.xerial</groupId>
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.34.0</version> <!-- Use the appropriate version -->
