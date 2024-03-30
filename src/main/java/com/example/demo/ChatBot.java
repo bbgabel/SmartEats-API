@@ -92,12 +92,12 @@ public class ChatBot {
                 saveKnowledgeBase("Knowledge_Base.json", knowledgeBase);
                 */
                 learn = true;
-                return "Bot: I don't know the answer. What do you mean to learn from it?";
+                return "I don't know the answer. What do you mean to learn from it?";
             }
     }
 
     public static String getClosestMatch(String userQuestion, List<String> questions) {
-        double similarityThreshold = 0.6;
+        double similarityThreshold = 0.7;
         List<String> matches = new ArrayList<>();
         for (String question : questions) {
             double similarity = similarity(userQuestion, question);

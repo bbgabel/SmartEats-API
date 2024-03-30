@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ApiController {
 
     MyRequestData data = new MyRequestData();
-    public int callNum = 1;
+    public int callNum = 32;
 
     /*
     @PostMapping("/api")
@@ -34,6 +34,13 @@ public class ApiController {
     @PostMapping("/chatbot")
     public ResponseEntity<String> handleChatbotRequest(@RequestBody String userInput) throws IOException, ParseException {
         String input = userInput.replace("+", " ");
+
+        System.out.println("RECEIVED: " + input);
+
+        if (input.toLowerCase().contains("input mode")) {
+            callNum = 1;
+            return ResponseEntity.ok("Input mode entered! Let's get started generated you a meal plan! To start off, what is your name?");
+        }
 
         if (callNum == 1) {
             data.age = extractNum(input);
