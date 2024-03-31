@@ -39,7 +39,7 @@ public class ApiController {
 
         if (input.toLowerCase().contains("input mode")) {
             callNum = 1;
-            return ResponseEntity.ok("Input mode entered! Let's get started generated you a meal plan! To start off, what is your name?");
+            return ResponseEntity.ok("Input mode entered! Let's get started generated you a meal plan! To start off, what is your age?");
         }
 
         if (callNum == 1) {
